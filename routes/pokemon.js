@@ -8,8 +8,6 @@ router.post('/pokemonDetails', authenticateToken, async (req, res) => {
     try {
         const { pokemonName } = req.body;
         
-        console.log('Buscando Pokémon:', pokemonName);
-
         // Validar que venga el nombre
         if (!pokemonName) {
         console.log('No se proporcionó nombre de Pokémon');
@@ -22,13 +20,11 @@ router.post('/pokemonDetails', authenticateToken, async (req, res) => {
         }
 
         // Hacer petición a PokeAPI
-        console.log('Consultando PokeAPI...');
         const response = await fetch(`${process.env.API_URL}${pokemonName.toLowerCase()}`);
         
         // Verificar si el Pokémon existe
         if (!response.ok) {
             if (response.status === 404) {
-                console.log('Pokémon no encontrado:', pokemonName);
                 return res.status(400).json({
                 name: "",
                 species: "",
@@ -41,7 +37,6 @@ router.post('/pokemonDetails', authenticateToken, async (req, res) => {
 
         // Obtener datos del Pokémon
         const pokemonData = await response.json();
-        console.log('Pokémon encontrado:', pokemonData.name);
 
         // Filtrar y formatear la respuesta
         const filteredData = {
