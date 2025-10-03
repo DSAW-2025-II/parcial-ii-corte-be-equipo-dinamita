@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send("Welcome to the backend of our exam.");
+})
+
 app.use('/api/v1', authRoutes);
 app.use('/api/v1', pokemonRoutes);
 
