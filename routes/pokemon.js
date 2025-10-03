@@ -46,14 +46,11 @@ router.post('/pokemonDetails', authenticateToken, async (req, res) => {
             img_url: pokemonData.sprites.other['official-artwork']?.front_default || 
                     pokemonData.sprites.front_default
         };
-
-        console.log('Enviando datos filtrados:', filteredData);
         
         // Responder al frontend
         res.status(200).json(filteredData);
         
     } catch (error) {
-        console.error('Error interno:', error.message);
         res.status(500).json({ 
         error: 'Error interno del servidor',
         details: error.message 
